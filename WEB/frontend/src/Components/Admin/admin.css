@@ -17,24 +17,29 @@
   padding: 8px;
   cursor: pointer;
 }
+
 .admintable_tr:hover {
   background-color: rgba(128, 128, 128, 0.096);
 }
+
 .admintable_tr_hd {
   background-color: rgba(128, 128, 128, 0.218);
 }
+
 .search_admin {
   width: 400px;
   border: 1px solid #f85606;
   padding: 5px 10px;
   font-size: 15px;
 }
+
 .action_set_admin {
   display: flex;
   margin-top: 20px;
   align-items: center;
   justify-content: space-between;
 }
+
 .add_btn_admin {
   background-color: #f85606;
   color: #fff;
@@ -45,56 +50,73 @@
   border: 1px solid #f85606;
   cursor: pointer;
 }
+
 .add_btn_admin:hover {
   background-color: #ffffff;
   font-weight: bold;
   color: #f85606;
   border: 1px solid #f85606;
 }
+
 .dis_with {
   width: 250px;
 }
+
 .tble_img {
   width: 100%;
   border-radius: 5px;
 }
+
 .img_rwo {
   width: 150px;
 }
-/* .btn_set {
+
+/* Flexbox layout for buttons */
+.btn_set {
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 8px;
-  justify-content: space-between;
-} */
+  height: 100%;
+  gap: 10px; /* Adds spacing between the buttons */
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.admin_table_td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.btn-update,
+.btn-delete {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .btn-update {
   background-color: green;
   color: white;
-  text-decoration: none;
-  padding: 3px 8px;
-  margin-top: 10px;
-  border-radius: 3px;
   border: 1px solid green;
 }
+
 .btn-update:hover {
   background-color: white;
   color: green;
-  border: 1px solid green;
 }
 
 .btn-delete {
   background-color: red;
   color: white;
-  text-decoration: none;
-  padding: 4px 8px;
-  margin-top: 10px;
-  margin-left: 25px;
-  cursor: pointer;
-  border-radius: 3px;
   border: 1px solid red;
 }
+
 .btn-delete:hover {
   background-color: white;
   color: red;
-  border: 1px solid red;
 }

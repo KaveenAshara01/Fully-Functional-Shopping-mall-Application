@@ -17,11 +17,11 @@ function Login() {
 
       if (response.status === 200) {
         const user = response.data;
-        localStorage.setItem("userId", user.id); // Save user ID
-        localStorage.setItem("user", JSON.stringify(user)); // Save user details
+        localStorage.setItem("userId", user.id); 
+        localStorage.setItem("user", JSON.stringify(user));
 
         alert("Login Successful.");
-        window.location.href = "/home"; // Navigate to the profile page
+        window.location.href = "/home"; 
       }
     } catch (error) {
       alert("Invalid username or password. Please try again.");

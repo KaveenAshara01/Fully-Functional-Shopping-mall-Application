@@ -15,7 +15,7 @@ function SideBar() {
   // Function to handle logout
   const handleLogout = () => {
     if (window.confirm("Do you want to log out?")) {
-      window.location.href = "/adminlogin"; // Navigate to login page
+      window.location.href = "/login"; // Navigate to login page
     }
   };
   return (

@@ -5,6 +5,7 @@
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
   transition: 0.3s ease-in-out;
+  
 }
 
 .nav_bar {
@@ -13,6 +14,7 @@
   justify-content: space-between;
   display: flex;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+  background-color:#34495e ;
 }
 
 .nav_item {
@@ -21,6 +23,7 @@
   display: flex;
   text-transform: uppercase;
   gap: 15px;
+  
 }
 .logo_nav {
   width: 40px;
@@ -34,6 +37,7 @@
   cursor: pointer;
   border-bottom: 1px solid #ffffff;
   font-weight: 600;
+  color: #f1f1f1;
 }
 .nav_item_action:hover {
   color: #f85606;
@@ -99,6 +103,8 @@
 .icon_nav{
   font-size: 25px;
   cursor: pointer;
+  color: #fbfbfb;
+  
 }
 .icon_nav:hover{
  color: #f85606;

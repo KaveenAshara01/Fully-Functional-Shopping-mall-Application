@@ -92,19 +92,19 @@ function CouponDashboard() {
             >
               Create New Coupon
             </button>
-            {/* <input
+            { <input
               type="text"
               className="search_admin"
               placeholder="Search Here By Coupon Name..."
               value={searchTerm}
               onChange={handleSearchChange}
-            /> */}
-            {/* <button
+            /> }
+            { <button
               className="add_btn_admin"
               onClick={handleDownloadPDF}
             >
               Generate Report
-            </button> */}
+            </button> }
           </div>
           <table className="admin_table">
             <thead className="admin_table_head">

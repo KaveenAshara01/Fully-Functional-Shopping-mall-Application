@@ -17,14 +17,14 @@ function AddCoupon() {
   const { couponName, couponCode, description, price, startDate, endDate } =
     coupon;
 
-  // Function to generate a random coupon code
+  
   const generateCouponCode = () => {
     const prefix = "SE";
-    const randomDigits = Math.random().toString().slice(2, 13); // Generate a string with 11 random digits
+    const randomDigits = Math.random().toString().slice(2, 13); 
     return prefix + randomDigits;
   };
 
-  // Set coupon code when component mounts
+  
   useEffect(() => {
     const code = generateCouponCode();
     setCoupon((prevCoupon) => ({

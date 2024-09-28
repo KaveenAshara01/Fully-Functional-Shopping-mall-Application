@@ -94,7 +94,7 @@ function MyCart() {
 
       await handleInventoryUpdate(orderItems);
 
-      // Redirect to payment page
+      
       window.location.href = `/payment?totalPrice=${finalprice}`;
     } catch (error) {
       console.error("Error during checkout:", error);
@@ -109,7 +109,7 @@ function MyCart() {
         quantity: item.quantity,
       }));
 
-      // Make sure to use the correct endpoint and pass the correct data
+      
       await axios.post(
         "http://localhost:8081/products/update-quantity",
         updates
@@ -202,18 +202,13 @@ function MyCart() {
               <h3 className="totprice">
                 Total Price: Rs.{finalprice.toFixed(2)}
               </h3>
-              {/* <button
+              <button
                 className="btn_checkout bn_checkout_btn"
                 onClick={() =>(window.location.href = `/payment?totalPrice=${finalprice}`)}
               >
                 Pay now
-              </button> */}
-              <button
-                className="btn_checkout bn_checkout_btn"
-                onClick={handleCheckout}
-              >
-                Pay now
               </button>
+             
 
               <hr className="hr_change" />
               <div className="paypal-button-container">
@@ -237,8 +232,7 @@ function MyCart() {
                   onApprove={async (data, actions) => {
                     await actions.order.capture();
                     alert("Payment Successful!");
-                    // Handle post-payment actions here
-                    // You might want to clear the cart, update the backend, etc.
+                    
                   }}
                   onError={(err) => {
                     console.error("PayPal error:", err);

@@ -6,11 +6,11 @@ function Nav() {
   const [activePage, setActivePage] = useState("");
 
   useEffect(() => {
-    // Set the active page based on the current path
+    
     setActivePage(window.location.pathname);
   }, []);
 
-  // Determine if the current page is active
+  
   const isActive = (path) => activePage === path;
 
   return (

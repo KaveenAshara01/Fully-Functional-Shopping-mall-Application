@@ -14,14 +14,21 @@ function UpdateProduct() {
     price: "",
     quantity: "",
     description: "",
+    seller: "", 
     imagePath: "",
   });
 
   const [imageFile, setImageFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState("");
 
-  const { itemname, category, price, quantity, description, imagePath } =
-    product;
+  const {
+    itemname,
+    category,
+    price,
+    quantity,
+    description,
+    seller,
+    imagePath,
+  } = product;
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,15 +38,6 @@ function UpdateProduct() {
   const onFileChange = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
-
-    // Create a URL for the image preview
-    const fileReader = new FileReader();
-    fileReader.onloadend = () => {
-      setPreviewUrl(fileReader.result);
-    };
-    if (file) {
-      fileReader.readAsDataURL(file);
-    }
   };
 
   useEffect(() => {
@@ -69,6 +67,7 @@ function UpdateProduct() {
       formData.append("price", price);
       formData.append("quantity", quantity);
       formData.append("description", description);
+      formData.append("seller", seller); // Added seller field for shop name
       if (imageFile) formData.append("image", imageFile);
 
       await axios.put(
@@ -184,29 +183,37 @@ function UpdateProduct() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description" className="from_label">
+              <label htmlFor="seller" className="from_label">
+                Shop Name:
+              </label>
+              <select
+                id="seller"
+                name="seller"
+                className="from_input"
+                value={seller}
+                onChange={onInputChange}
+                required
+              >
+                <option value="">Select Shop</option>
+                <option value="Fabric Avenue">Fabric Avenue</option>
+                <option value="Toybox Treasures">Toybox Treasures</option>
+                <option value="Glow & Grace">Glow & Grace</option>
+                <option value="GearUp Sports">GearUp Sports</option>
+                <option value="Paper & Prose">Paper & Prose</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="image" className="from_label">
                 Update Image:
               </label>
-              <br />
-              <label htmlFor="image" className="custom-file-upload">
-                Select Photo
-                <input
-                  type="file"
-                  id="image"
-                  name="image"
-                  className="from_input"
-                  onChange={onFileChange}
-                />
-              </label>
-              {previewUrl && (
-                <div className="image-preview">
-                  <img
-                    src={previewUrl}
-                    alt="Preview"
-                    className="image_preview"
-                  />
-                </div>
-              )}
+              <input
+                type="file"
+                id="image"
+                name="image"
+                className="from_input"
+                onChange={onFileChange}
+              />
             </div>
             <button type="submit" className="from_btn">
               Update

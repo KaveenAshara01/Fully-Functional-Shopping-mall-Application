@@ -8,7 +8,7 @@ import "./Coupon.css";
 
 function UserDiscount() {
   const [coupons, setCoupon] = useState([]);
-  const [copiedCoupon, setCopiedCoupon] = useState(null); // Track copied coupon
+  const [copiedCoupon, setCopiedCoupon] = useState(null); 
   const { id } = useParams();
 
   useEffect(() => {

@@ -15,8 +15,6 @@ function PaymentPage() {
   });
   const [totalPrice, setTotalPrice] = useState(0);
   const [coins, setCoins] = useState(0);
-  const [couponCode, setCouponCode] = useState(""); // State for coupon code
-  const [discount, setDiscount] = useState(0); // State for discount amount
   const navigate = useNavigate();
   const location = useLocation();
   const userId = localStorage.getItem("userId");
@@ -41,14 +39,52 @@ function PaymentPage() {
     setPaymentDetails({ ...paymentDetails, [e.target.name]: e.target.value });
   };
 
+  
+  const handleCardNumberChange = (e) => {
+    let value = e.target.value.replace(/\D/g, ""); 
+    if (value.length <= 16) {
+      value = value.replace(/(\d{4})(?=\d)/g, "$1 "); 
+      setPaymentDetails({ ...paymentDetails, cardnumber: value });
+    } else {
+      alert("Card number must be exactly 16 digits.");
+    }
+  };
+
+  
+  const handleCVVChange = (e) => {
+    const value = e.target.value.replace(/\D/g, ""); 
+    if (value.length <= 3) {
+      setPaymentDetails({ ...paymentDetails, cvv: value });
+    } else {
+      alert("CVV must be exactly 3 digits.");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const finalPrice = totalPrice - discount;
+
+    
+    const cardNumberRegex = /^[0-9]{16}$/;
+    if (!cardNumberRegex.test(paymentDetails.cardnumber.replace(/\s/g, ""))) {
+      
+      alert("Please enter a valid 16-digit card number.");
+      return;
+    }
+
+    
+    const cvvRegex = /^[0-9]{3}$/;
+    if (!cvvRegex.test(paymentDetails.cvv)) {
+      alert("Please enter a valid 3-digit CVV.");
+      return;
+    }
+
+    
+    const finalPrice = totalPrice;
     try {
       await axios.post("http://localhost:8081/payment/process", {
         userId,
         address: paymentDetails.address,
-        cardnumber: paymentDetails.cardnumber,
+        cardnumber: paymentDetails.cardnumber.replace(/\s/g, ""), 
         cvv: paymentDetails.cvv,
         expdate: paymentDetails.expdate,
         cardholdername: paymentDetails.cardholdername,
@@ -102,7 +138,9 @@ function PaymentPage() {
                 type="text"
                 name="cardnumber"
                 value={paymentDetails.cardnumber}
-                onChange={handleInputChange}
+                onChange={handleCardNumberChange}
+                placeholder="1234 5678 9012 3456"
+                maxLength="19" 
                 required
               />
             </div>
@@ -113,7 +151,8 @@ function PaymentPage() {
                 type="text"
                 name="cvv"
                 value={paymentDetails.cvv}
-                onChange={handleInputChange}
+                onChange={handleCVVChange}
+                maxLength="3" 
                 required
               />
             </div>

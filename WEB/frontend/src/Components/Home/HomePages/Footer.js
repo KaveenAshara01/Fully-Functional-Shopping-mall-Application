@@ -1,48 +1,76 @@
 import React from "react";
 import "./footer.css";
-import { FaFacebook } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
-import { FaSquareWhatsapp } from "react-icons/fa6";
+import { FaFacebookF, FaYoutube, FaWhatsapp } from "react-icons/fa";
+
 function Footer() {
   return (
-    <div className="footer_ful">
-      <div className="body_container">
-        <div className="section_footer">
-          <div className="sub_box">
-            <h4 className="footer_topic">Shooping EYE</h4>
-            <p className="footer_p">
-              What was the last time you had an exciting and rewarding online
-              shopping experience? Can’t remember! How about we make it even
-              more convenient, fast and affordable to fulfill all your buying
-              needs? With Sri Lanka's biggest online shopping store,
-            </p>
-          </div>
-          <div className="sub_box">
-            <h4 className="footer_topic">Shooping EYE</h4>
-            <p className="footer_p">Home</p>
-            <p className="footer_p">Product</p>
-            <p className="footer_p">careers</p>
-            <p className="footer_p">AboutUs</p>
-            <p className="footer_p">ContactUs</p>
-            <p className="footer_p">FAQ</p>
-          </div>
-          <div className="sub_box">
-            <h4 className="footer_topic">Conet With Us</h4>
-            <div className="icon_set_footer">
-              <div className="icon_s">
-                <FaFacebook className="iccon" />
-              </div>
-              <div className="icon_s">
-                <FaYoutube className="iccon" />
-              </div>
-              <div className="icon_s">
-                <FaSquareWhatsapp className="iccon" />
-              </div>
-            </div>
+    <footer className="footer_container">
+      <div className="footer_wrapper">
+        <div className="footer_section footer_about">
+          <h4 className="footer_title">Shopping EYE</h4>
+          <p className="footer_description">
+            When was the last time you had an exciting and rewarding online
+            shopping experience? Can’t remember? Let’s make it even more
+            convenient, fast, and affordable to fulfill all your shopping needs
+            with Sri Lanka's biggest online shopping store.
+          </p>
+        </div>
+        <div className="footer_section footer_links">
+          <h4 className="footer_title">Quick Links</h4>
+          <ul className="footer_list">
+            <li>
+              <a href="#" className="footer_link">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer_link">
+                Products
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer_link">
+                Careers
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer_link">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer_link">
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer_link">
+                FAQ
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="footer_section footer_social">
+          <h4 className="footer_title">Connect With Us</h4>
+          <div className="footer_social_icons">
+            <a href="#" className="social_icon" aria-label="Facebook">
+              <FaFacebookF />
+            </a>
+            <a href="#" className="social_icon" aria-label="YouTube">
+              <FaYoutube />
+            </a>
+            <a href="#" className="social_icon" aria-label="WhatsApp">
+              <FaWhatsapp />
+            </a>
           </div>
         </div>
       </div>
-    </div>
+      <div className="footer_bottom">
+        <p>
+          &copy; {new Date().getFullYear()} Shopping EYE. All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 }
 

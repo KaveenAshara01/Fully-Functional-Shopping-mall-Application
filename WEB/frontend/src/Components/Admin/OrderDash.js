@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import "./admin.css";
 import SideBar from "./SideBar/SideBar";
 
@@ -25,7 +25,6 @@ function OrderDash() {
     fetchOrders();
   }, []);
 
-
   // Function to handle search
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
@@ -39,28 +38,54 @@ function OrderDash() {
   );
 
   // Function to handle PDF download
-  const handleDownloadPDF = async () => {
-    const input = document.getElementById("order-table");
-    const canvas = await html2canvas(input);
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    const imgWidth = 210;
-    const pageHeight = 295;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
-    let position = 0;
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
 
-    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
+    // Title of the document
+    doc.setFontSize(18);
+    doc.text("Order Details Report", 14, 22);
 
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
+    // Subtitle (e.g., date of generation)
+    const date = new Date().toLocaleString();
+    doc.setFontSize(12);
+    doc.text(`Report generated on: ${date}`, 14, 30);
 
-    pdf.save("order_details.pdf");
+    // Beautified table with teal header
+    doc.autoTable({
+      startY: 40,
+      head: [["Order ID", "Total Price (Rs.)"]],
+      body: filteredOrders.map((order) => [
+        order.id,
+        `Rs.${order.totalPrice}.00`,
+      ]),
+      theme: "striped", // Adds a striped design to the table
+      headStyles: {
+        fillColor: [80, 127, 181], // Teal color for header (you can adjust this RGB value)
+        textColor: [255, 255, 255], // White text for header
+        fontSize: 12, // Adjust header font size
+      },
+      bodyStyles: {
+        fontSize: 10, // Adjust body font size
+        cellPadding: 6, // Add padding to table cells
+      },
+      alternateRowStyles: {
+        fillColor: [240, 240, 240], // Light gray for alternate rows
+      },
+      margin: { top: 40 }, 
+      styles: {
+        cellPadding: 4, 
+        halign: "center", 
+        valign: "middle", 
+        lineWidth: 0.1, // Border width
+      },
+    });
+
+    // Footer (optional)
+    doc.setFontSize(10);
+    doc.text("End of report", 14, doc.lastAutoTable.finalY + 10);
+
+    // Save the PDF
+    doc.save("order-details-report.pdf");
   };
 
   return (

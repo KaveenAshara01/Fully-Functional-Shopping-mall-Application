@@ -7,7 +7,7 @@ import SideBar from "../../Admin/SideBar/SideBar";
 
 function AddProduct() {
   const navigate = useNavigate();
-  const { id } = useParams(); // Get the ID from the URL params if present
+  const { id } = useParams(); 
 
   const [product, setProduct] = useState({
     itemname: "",
@@ -15,26 +15,26 @@ function AddProduct() {
     price: "",
     quantity: "",
     description: "",
-    seller: "", // Using "seller" for shop name
-    image: null, // Added for image upload
+    seller: "", 
+    image: null, 
   });
 
-  const [previewUrl, setPreviewUrl] = useState(""); // State for image preview
+  const [previewUrl, setPreviewUrl] = useState(""); 
 
   const { itemname, category, price, quantity, description, seller, image } =
     product;
 
   useEffect(() => {
     if (id) {
-      // Fetch product details for update
+     
       axios
         .get(`http://localhost:8081/productmanagement/${id}`)
         .then((response) => {
           setProduct({
             ...response.data,
-            image: null, // reset image if you want to keep the existing one
+            image: null, 
           });
-          // Set preview URL if there's an existing image
+          
           setPreviewUrl(`http://localhost:8081/uploads/${response.data.image}`);
         })
         .catch((error) => {
@@ -49,7 +49,7 @@ function AddProduct() {
       const file = files[0];
       setProduct({ ...product, [name]: file });
 
-      // Create a URL for the image preview
+      
       const fileReader = new FileReader();
       fileReader.onloadend = () => {
         setPreviewUrl(fileReader.result);
@@ -70,7 +70,7 @@ function AddProduct() {
     formData.append("price", price);
     formData.append("quantity", quantity);
     formData.append("description", description);
-    formData.append("seller", seller); // Sending the seller (shop name) to backend
+    formData.append("seller", seller); 
     if (image) {
       formData.append("image", image);
     }
@@ -205,7 +205,7 @@ function AddProduct() {
                 id="seller"
                 className="from_input"
                 name="seller"
-                value={seller} // Ensuring seller is being set correctly
+                value={seller} 
                 onChange={onInputChange}
                 required
               >

@@ -42,22 +42,22 @@ const Shops = () => {
     return <p>{error}</p>;
   }
 
-  // Function to check and return the correct image based on seller
+  
   const getSellerImage = (seller) => {
     switch (seller) {
       case "Fabric Avenue":
-        return clothsLogo; // Return the image for Fabric Avenue
+        return clothsLogo; 
       case "Glow & Grace":
-        return beautilogo; // Return the image for Glow & Grace
+        return beautilogo; 
       case "GearUp Sports":
-        return sportlogo; // Return the image for GearUp Sports
+        return sportlogo; 
       case "Paper & Prose":
-        return bookslogo; // Return the image for Paper & Prose
+        return bookslogo; 
       case "Toybox Treasures":
-        return toylogo; // Return the image for Toybox Treasures
-      // Add cases for other sellers if you have images for them
+        return toylogo; 
+     
       default:
-        return null; // No image if none exists
+        return null; 
     }
   };
 
@@ -71,7 +71,7 @@ const Shops = () => {
         ) : (
           <div className="shop-cards">
             {sellers
-              .filter((seller) => seller !== null && seller !== "") // Filter out null or empty values
+              .filter((seller) => seller !== null && seller !== "") 
               .map((seller, index) => (
                 <div
                   key={index}
@@ -80,8 +80,8 @@ const Shops = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <h3 className="shop-name">{seller}</h3>{" "}
-                  {/* Shop Name on Top */}
-                  {/* Render shop logo if available */}
+                  {}
+                  {}
                   {getSellerImage(seller) && (
                     <img
                       src={getSellerImage(seller)}

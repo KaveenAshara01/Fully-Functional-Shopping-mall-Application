@@ -8,17 +8,17 @@ function AfterNav() {
   const [activePage, setActivePage] = useState("");
 
   useEffect(() => {
-    // Set the active page based on the current path
+    
     setActivePage(window.location.pathname);
   }, []);
 
-  // Determine if the current page is active
+  
   const isActive = (path) => activePage === path;
 
-  // Handle logout process
+  
   const handleLogout = () => {
     if (window.confirm("Do you want to log out?")) {
-      window.location.href = "/login"; // Navigate to login page
+      window.location.href = "/login"; 
     }
   };
 

@@ -32,17 +32,29 @@ function ProductDetails() {
         alert("Product deleted successfully!");
       } catch (error) {
         console.error("Error deleting Product:", error);
-        alert("Can't Delete This Item , This Item Coustomers are on their way to buy.");
+        alert(
+          "Can't Delete This Item , This Item Customers are on their way to buy."
+        );
       }
     }
   };
+
+  // Function to handle PDF download with enhanced styling
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
-    doc.text("Product Details", 14, 16);
 
-    // Add table
+    // Title of the document
+    doc.setFontSize(18);
+    doc.text("Product Details Report", 14, 22);
+
+    // Subtitle (e.g., date of generation)
+    const date = new Date().toLocaleString();
+    doc.setFontSize(12);
+    doc.text(`Report generated on: ${date}`, 14, 30);
+
+    // Beautified table with teal header
     doc.autoTable({
-      startY: 30,
+      startY: 40,
       head: [
         ["ID", "Item Name", "Category", "Price", "Quantity", "Description"],
       ],
@@ -54,10 +66,36 @@ function ProductDetails() {
         product.quantity,
         product.description,
       ]),
+      theme: "striped", 
+      headStyles: {
+        fillColor: [80, 127, 181], 
+        textColor: [255, 255, 255], 
+        fontSize: 12, 
+      },
+      bodyStyles: {
+        fontSize: 10, 
+        cellPadding: 6, 
+      },
+      alternateRowStyles: {
+        fillColor: [240, 240, 240], 
+      },
+      margin: { top: 40 }, 
+      styles: {
+        cellPadding: 4, 
+        halign: "center", 
+        valign: "middle", 
+        lineWidth: 0.1, 
+      },
     });
 
-    doc.save("product-details.pdf");
+    
+    doc.setFontSize(10);
+    doc.text("End of report", 14, doc.lastAutoTable.finalY + 10);
+
+    
+    doc.save("product-details-report.pdf");
   };
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
@@ -84,7 +122,7 @@ function ProductDetails() {
             >
               Add Product
             </button>
-            {/* <input
+            <input
               type="text"
               className="search_admin"
               placeholder="Search Here..."
@@ -93,7 +131,7 @@ function ProductDetails() {
             />
             <button className="add_btn_admin" onClick={handleDownloadPDF}>
               Generate Report
-            </button> */}
+            </button>
           </div>
           <table className="admin_table">
             <thead className="admin_table_head">
@@ -121,7 +159,7 @@ function ProductDetails() {
                   </td>
                   <td className="admin_table_td img_rwo">
                     <img
-                      src={`http://localhost:8081/${product.imagePath}`}// Adjust this path if needed
+                      src={`http://localhost:8081/${product.imagePath}`} // Adjust this path if needed
                       alt={product.itemname}
                       className="tble_img"
                     />

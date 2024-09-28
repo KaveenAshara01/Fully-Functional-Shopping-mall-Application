@@ -75,7 +75,7 @@ const SellerProducts = () => {
       <div className="body_container">
         <div>
           <div>
-          <h2>Products for Seller: {seller}</h2>
+          <h2> {seller}</h2>
           </div>
         </div>
       
