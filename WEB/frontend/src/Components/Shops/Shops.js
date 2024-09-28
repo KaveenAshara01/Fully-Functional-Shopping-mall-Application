@@ -1,87 +1,14 @@
-// import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';  // Import useNavigate for navigation
-// import axios from 'axios';
-// import AfterNav from '../Home/NavBar/AfterNav';
-// import Footer from '../Home/HomePages/Footer';
-
-// const Shops = () => {
-//   const [sellers, setSellers] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-//   const navigate = useNavigate();  // Hook to handle navigation
-
-//   useEffect(() => {
-//     axios.get('http://localhost:8081/sellers')
-//       .then(response => {
-//         setSellers(response.data);
-//         setLoading(false);
-//       })
-//       .catch(error => {
-//         console.error('There was an error fetching the sellers!', error);
-//         setError('There was an error fetching the sellers!');
-//         setLoading(false);
-//       });
-//   }, []);
-
-//   const handleShopClick = (seller) => {
-//     navigate(`/seller/${seller}`);  // Navigate to the seller's products page
-//   };
-
-//   if (loading) {
-//     return <p>Loading...</p>;
-//   }
-
-//   if (error) {
-//     return <p>{error}</p>;
-//   }
-
-//   return (
-//     <div>
-
-// <AfterNav />
-
-
-
-//       <h2>Available Shops</h2>
-//       {sellers.length === 0 ? (
-//         <p>No shops available at the moment.</p>
-//       ) : (
-//         <ul>
-//           {sellers.map((seller, index) => (
-//             <li key={index} onClick={() => handleShopClick(seller)} style={{ cursor: 'pointer', color: 'blue' }}>
-//               {seller}
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-
-    
-//       <Footer />
-
-//     </div>
-
-
-
-
-
-
-
-
-//   );
-// };
-
-// export default Shops;
-
-
-
-
-
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import AfterNav from '../Home/NavBar/AfterNav';
-import Footer from '../Home/HomePages/Footer';
-import './Shops.css';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import AfterNav from "../Home/NavBar/AfterNav";
+import Footer from "../Home/HomePages/Footer";
+import "./Shops.css";
+import clothsLogo from "./img/clothslogo.webp"; // Import your Fabric Avenue image
+import beautilogo from "./img/beautilogo.jpg"; // Import your Glow & Grace image
+import sportlogo from "./img/sportlogos.jpg"; // Import your GearUp Sports image
+import bookslogo from "./img/bookslogo.webp"; // Import your Paper & Prose image
+import toylogo from "./img/toylogo.jpg"; // Import your Toybox Treasures image
 
 const Shops = () => {
   const [sellers, setSellers] = useState([]);
@@ -90,14 +17,15 @@ const Shops = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8081/sellers')
-      .then(response => {
+    axios
+      .get("http://localhost:8081/sellers")
+      .then((response) => {
         setSellers(response.data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error('There was an error fetching the sellers!', error);
-        setError('There was an error fetching the sellers!');
+      .catch((error) => {
+        console.error("There was an error fetching the sellers!", error);
+        setError("There was an error fetching the sellers!");
         setLoading(false);
       });
   }, []);
@@ -114,6 +42,25 @@ const Shops = () => {
     return <p>{error}</p>;
   }
 
+  // Function to check and return the correct image based on seller
+  const getSellerImage = (seller) => {
+    switch (seller) {
+      case "Fabric Avenue":
+        return clothsLogo; // Return the image for Fabric Avenue
+      case "Glow & Grace":
+        return beautilogo; // Return the image for Glow & Grace
+      case "GearUp Sports":
+        return sportlogo; // Return the image for GearUp Sports
+      case "Paper & Prose":
+        return bookslogo; // Return the image for Paper & Prose
+      case "Toybox Treasures":
+        return toylogo; // Return the image for Toybox Treasures
+      // Add cases for other sellers if you have images for them
+      default:
+        return null; // No image if none exists
+    }
+  };
+
   return (
     <div>
       <AfterNav />
@@ -124,18 +71,26 @@ const Shops = () => {
         ) : (
           <div className="shop-cards">
             {sellers
-              .filter(seller => seller !== null && seller !== '')  // Filter out null or empty values
+              .filter((seller) => seller !== null && seller !== "") // Filter out null or empty values
               .map((seller, index) => (
                 <div
                   key={index}
                   className="product_cards"
                   onClick={() => handleShopClick(seller)}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 >
-                  <h3>{seller}</h3>
+                  <h3 className="shop-name">{seller}</h3>{" "}
+                  {/* Shop Name on Top */}
+                  {/* Render shop logo if available */}
+                  {getSellerImage(seller) && (
+                    <img
+                      src={getSellerImage(seller)}
+                      alt={seller}
+                      className="shop-logo"
+                    />
+                  )}
                 </div>
-              ))
-            }
+              ))}
           </div>
         )}
       </div>
@@ -145,4 +100,3 @@ const Shops = () => {
 };
 
 export default Shops;
-
