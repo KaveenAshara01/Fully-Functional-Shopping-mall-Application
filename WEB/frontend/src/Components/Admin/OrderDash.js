@@ -72,7 +72,7 @@ function OrderDash() {
         <div className="details_body">
           <h1>Order Details</h1>
           <div className="action_set_admin">
-            {/* <input
+            <input
               type="text"
               className="search_admin"
               placeholder="Search Here..."
@@ -81,7 +81,7 @@ function OrderDash() {
             />
             <button className="add_btn_admin" onClick={handleDownloadPDF}>
               Generate Report
-            </button> */}
+            </button>
           </div>
           <table className="admin_table" id="order-table">
             <thead className="admin_table_head">
