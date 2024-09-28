@@ -18,9 +18,10 @@ function AfterNav() {
   
   const handleLogout = () => {
     if (window.confirm("Do you want to log out?")) {
-      window.location.href = "/login"; 
-    }
-  };
+      localStorage.removeItem("userId");  // Remove userId from localStorage
+      localStorage.removeItem("user");    // Remove user object from localStorage
+      window.location.href = "/login";
+  }};
 
   return (
     <div>
